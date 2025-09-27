@@ -1,0 +1,28 @@
+{
+  "search_parameters": {
+    "engine": "google",
+    "q": "best link building tools"
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "Example - Link Building Software",
+      "link": "https://www.example.com/link-building"
+    },
+    {
+      "position": 2,
+      "title": "Competitor One",
+      "link": "https://competitor-one.com/blog/tool"
+    },
+    {
+      "position": 3,
+      "title": "Another Site",
+      "link": "https://sub.domain.com/article"
+    },
+    {
+      "position": 4,
+      "title": "Competitor Two",
+      "link": "https://www.competitor-two.org/overview"
+    }
+  ]
+}
