@@ -1,38 +1,33 @@
-name: FM public tender API diagnostic
+name: FM 14-day official tender backtest
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
-  probe:
+  backtest:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 16
     steps:
-      - name: Check formats and response errors
-        shell: bash
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/fm-backtest-20261119
+      - name: Collect and qualify official awards
+        run: python research/fm-backtest.py
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fm-public-contract-backtest-2026-11
+          path: research/fm-output/
+          if-no-files-found: warn
+      - name: Commit public dataset to research branch
         run: |
-          python - <<'PY'
-          import urllib.request,urllib.error,urllib.parse,json
-          tests=[
-          ('FTS_1_0_nostage','https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','limit':'5'}),
-          ('FTS_1_1_nostage','https://www.find-tender.service.gov.uk/api/1.1/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','limit':'5'}),
-          ('FTS_1_0_stage','https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','stages':'award','limit':'5'}),
-          ('FTS_1_1_stage','https://www.find-tender.service.gov.uk/api/1.1/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','stages':'award','limit':'5'}),
-          ('CF_100','https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search',{'publishedFrom':'2026-11-05T00:00:00Z','publishedTo':'2026-11-06T00:00:00Z','size':'100','page':'1'}),
-          ('CF_full','https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search',{'publishedFrom':'2026-11-05','publishedTo':'2026-11-18','size':'100','page':'1'}),
-          ]
-          for name,base,params in tests:
-            try:
-              url=base+'?'+urllib.parse.urlencode(params)
-              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (open procurement data study)','Accept':'application/json'})
-              with urllib.request.urlopen(req,timeout=35) as f:
-                b=f.read(2500000)
-                try:
-                  j=json.loads(b)
-                  print(name,'HTTP',f.status,'LEN',len(b),'RELEASES',len(j.get('releases',[])),'KEYS',list(j),'MORE',str(j.get('links',{}))[:300])
-                  for r in j.get('releases',[])[:2]:print('ITEM',r.get('date'),r.get('ocid'),str(r.get('tender',{}).get('title'))[:90],str(r.get('tag'))[:70])
-                except Exception as e: print(name,'INVALID_JSON',repr(e),b[:1000])
-            except urllib.error.HTTPError as e: print(name,'HTTP_ERROR',e.code,e.read(1200).decode('utf-8','replace'))
-            except Exception as e: print(name,'ERROR',repr(e))
-          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/fm-output/
+          git commit -m "Research: official procurement 14-day backtest evidence" || exit 0
+          git push origin HEAD:research/fm-backtest-20261119
