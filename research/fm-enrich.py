@@ -100,7 +100,7 @@ with open(ROOT+'/fts_review_priority.csv','w',newline='',encoding='utf-8') as f:
  w=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore');w.writeheader();w.writerows(review)
 summary={'source_candidates':len(base),'enriched':len(results),'review_priority':len(review),
   'verified_hiring_linked':0,'parse_errors':[x['notice_id'] for x in results if x.get('screening_result')=='PARSE_ERROR'],
-  'stage_counts':dict(collections.Counter((x.get('award_status'),x.get('contract_status')) for x in results))}
+  'stage_counts':{str(k):v for k,v in collections.Counter((x.get('award_status'),x.get('contract_status')) for x in results).items()}}
 with open(ROOT+'/enrichment_summary.json','w') as f:json.dump(summary,f,indent=2,default=str)
 print('ENRICHMENT_SUMMARY',json.dumps(summary),flush=True)
 for x in sorted(review,key=lambda r:-r['amount_gbp']):
