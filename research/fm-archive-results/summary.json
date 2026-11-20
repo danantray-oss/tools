@@ -7,22 +7,31 @@
     {
       "source": "FTS",
       "day": "2026-11-05",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 555,
+      "records": 555,
+      "suspects": 21,
+      "source_url": "https://cdp-sirsi-production-fts-471112843276.s3.eu-west-2.amazonaws.com/Harvester/2026-11/UK%20Public%20Procurement%20Notices%20-%205th%20November%202026.zip"
     },
     {
       "source": "CF",
       "day": "2026-11-05",
-      "status": "OK",
-      "files": 1,
-      "records": 128,
-      "suspects": 6,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-05.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
+      "day": "2026-11-06",
+      "status": "OK",
+      "files": 487,
+      "records": 487,
+      "suspects": 12,
+      "source_url": "https://cdp-sirsi-production-fts-471112843276.s3.eu-west-2.amazonaws.com/Harvester/2026-11/UK%20Public%20Procurement%20Notices%20-%206th%20November%202026.zip"
+    },
+    {
+      "source": "CF",
       "day": "2026-11-06",
       "status": "MISSING_FROM_MANIFEST",
       "files": 0,
@@ -30,46 +39,38 @@
       "source_url": ""
     },
     {
-      "source": "CF",
-      "day": "2026-11-06",
-      "status": "OK",
-      "files": 1,
-      "records": 149,
-      "suspects": 1,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-06.csv"
-    },
-    {
       "source": "FTS",
       "day": "2026-11-07",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
-    },
-    {
-      "source": "CF",
-      "day": "2026-11-07",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
-    },
-    {
-      "source": "FTS",
-      "day": "2026-11-08",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
-    },
-    {
-      "source": "CF",
-      "day": "2026-11-08",
       "status": "OK",
-      "files": 1,
-      "records": 1,
+      "files": 2,
+      "records": 2,
       "suspects": 0,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-08.csv"
+      "source_url": "https://cdp-sirsi-production-fts-471112843276.s3.eu-west-2.amazonaws.com/Harvester/2026-11/UK%20Public%20Procurement%20Notices%20-%207th%20November%202026.zip"
+    },
+    {
+      "source": "CF",
+      "day": "2026-11-07",
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
+    },
+    {
+      "source": "FTS",
+      "day": "2026-11-08",
+      "status": "OK",
+      "files": 5,
+      "records": 5,
+      "suspects": 0,
+      "source_url": "https://cdp-sirsi-production-fts-471112843276.s3.eu-west-2.amazonaws.com/Harvester/2026-11/UK%20Public%20Procurement%20Notices%20-%208th%20November%202026.zip"
+    },
+    {
+      "source": "CF",
+      "day": "2026-11-08",
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -83,11 +84,10 @@
     {
       "source": "CF",
       "day": "2026-11-09",
-      "status": "OK",
-      "files": 1,
-      "records": 130,
-      "suspects": 0,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-09.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -101,11 +101,10 @@
     {
       "source": "CF",
       "day": "2026-11-10",
-      "status": "OK",
-      "files": 1,
-      "records": 103,
-      "suspects": 3,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-10.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -119,11 +118,10 @@
     {
       "source": "CF",
       "day": "2026-11-11",
-      "status": "OK",
-      "files": 1,
-      "records": 108,
-      "suspects": 4,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-11.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -137,11 +135,10 @@
     {
       "source": "CF",
       "day": "2026-11-12",
-      "status": "OK",
-      "files": 1,
-      "records": 103,
-      "suspects": 3,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-12.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -155,11 +152,10 @@
     {
       "source": "CF",
       "day": "2026-11-13",
-      "status": "OK",
-      "files": 1,
-      "records": 117,
-      "suspects": 1,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-13.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -207,11 +203,10 @@
     {
       "source": "CF",
       "day": "2026-11-16",
-      "status": "OK",
-      "files": 1,
-      "records": 54,
-      "suspects": 0,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-16.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -225,11 +220,10 @@
     {
       "source": "CF",
       "day": "2026-11-17",
-      "status": "OK",
-      "files": 1,
-      "records": 149,
-      "suspects": 3,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-17.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     },
     {
       "source": "FTS",
@@ -243,52 +237,59 @@
     {
       "source": "CF",
       "day": "2026-11-18",
-      "status": "OK",
-      "files": 1,
-      "records": 126,
-      "suspects": 1,
-      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-18.csv"
+      "status": "MISSING_FROM_MANIFEST",
+      "files": 0,
+      "records": 0,
+      "source_url": ""
     }
   ],
-  "files_downloaded": 3526,
-  "notices_screened": 4683,
-  "fts_potential_award_notices": 79,
-  "cf_potential_award_notices": 22,
-  "cf_screened_candidates": 15,
+  "files_downloaded": 4564,
+  "notices_screened": 4564,
+  "fts_potential_award_notices": 112,
+  "cf_potential_award_notices": 0,
+  "cf_screened_candidates": 0,
   "fts_source_notice_types": {
-    "UK4_2023": 730,
-    "UK5_2023": 159,
-    "UK7_2023": 1182,
-    "UK6_2023": 459,
-    "F02_2014": 14,
-    "UK15_2023": 18,
-    "UK2_2023": 292,
-    "UK10_2023": 21,
-    "UK17_2023": 26,
-    "F03_2014": 168,
-    "NOTICE_UUID": 191,
-    "F01_2014": 29,
-    "UK1_2023": 50,
-    "UK12_2023": 50,
-    "UK9_2023": 10,
-    "UK3_2023": 22,
+    "UK4_2023": 932,
+    "UK2_2023": 380,
+    "UK7_2023": 1544,
+    "UK6_2023": 632,
+    "UK12_2023": 63,
+    "UK17_2023": 41,
+    "UK5_2023": 194,
+    "F03_2014": 220,
+    "F14_2014": 33,
+    "NOTICE_UUID": 230,
+    "F02_2014": 23,
+    "UK9_2023": 13,
+    "UK3_2023": 32,
+    "F01_2014": 34,
+    "UK11_2023": 20,
+    "UK10_2023": 28,
+    "UK1_2023": 68,
+    "F06_2014": 9,
+    "UK15_2023": 19,
+    "F15_2014": 3,
+    "F05_2014": 1,
+    "F20_2014": 34,
     "UK13_2023": 7,
-    "F06_2014": 6,
-    "F14_2014": 28,
     "F21_2014": 1,
-    "F20_2014": 33,
-    "UK11_2023": 14,
-    "F15_2014": 2,
     "UK14_2023": 3
   },
   "errors": [
-    "FTS 2026-11-05 missing manifest resource",
-    "FTS 2026-11-06 missing manifest resource",
-    "FTS 2026-11-07 missing manifest resource",
+    "CF 2026-11-05 missing manifest resource",
+    "CF 2026-11-06 missing manifest resource",
     "CF 2026-11-07 missing manifest resource",
-    "FTS 2026-11-08 missing manifest resource",
+    "CF 2026-11-08 missing manifest resource",
+    "CF 2026-11-09 missing manifest resource",
+    "CF 2026-11-10 missing manifest resource",
+    "CF 2026-11-11 missing manifest resource",
+    "CF 2026-11-12 missing manifest resource",
+    "CF 2026-11-13 missing manifest resource",
     "CF 2026-11-14 missing manifest resource",
-    "CF 2026-11-15 missing manifest resource"
+    "CF 2026-11-15 missing manifest resource",
+    "CF 2026-11-16 missing manifest resource",
+    "CF 2026-11-17 missing manifest resource",
+    "CF 2026-11-18 missing manifest resource"
   ],
   "all_sources_complete": false,
   "hiring_linked_verified": 0,
