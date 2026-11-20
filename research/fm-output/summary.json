@@ -1,0 +1,25 @@
+{
+  "window_start": "2026-11-05T00:00:00",
+  "window_end": "2026-11-18T23:59:59",
+  "official_feed": {
+    "FTS": {
+      "pages": 4,
+      "releases": 354,
+      "complete": true
+    },
+    "CF": {
+      "pages": 3,
+      "releases": 300,
+      "complete": false
+    }
+  },
+  "collection_errors": [
+    "CF full page without continuation"
+  ],
+  "award_rows_deduplicated": 961,
+  "potential_candidates": 1,
+  "linked_hiring_independently_verified": 0,
+  "method": "Official release API. Scores inferred only. No hiring corroboration. Framework without allocated contract excluded.",
+  "completeness": false,
+  "tested_at_utc": "2026-11-20T02:32:12.602136+00:00"
+}
