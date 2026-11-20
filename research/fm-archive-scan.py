@@ -36,7 +36,7 @@ for day in monthdates:
   d=day.day; suffix='th' if 11<=d%100<=13 else {1:'st',2:'nd',3:'rd'}.get(d%10,'th')
   for source in ['FTS','CF']:
     target=f'{d}{suffix} November 2026' if source=='FTS' else date
-    matches=[r for r in meta[source] if target in r.get('name','')]
+    matches=[r for r in meta[source] if r.get('name','').rsplit(' - ',1)[-1]==target]
     if len(matches)!=1:
       archivedays.append({'source':source,'day':date,'status':'MISSING_FROM_MANIFEST','files':0,'records':0,'source_url':''})
       errors.append(f'{source} {date} missing manifest resource')
@@ -134,7 +134,7 @@ for r in allrec:
   title=r['title']; descr=r.get('match_context','')
   r['screening_exclusion']=''
   if digital.search(title):r['screening_exclusion']='Software/digital service'
-  elif soft.search(title) and not hard.search(title):r['screening_exclusion']='Soft-FM adjacent only'
+  elif (soft.search(title) or re.search(r'soft fm|waste|building materials|consultancy|engineering facility|management system|portfolio management',title,re.I)) and not re.search(r'(?:gas|lift|electrical|mechanical|building) maintenance',title,re.I):r['screening_exclusion']='Soft-FM, materials, software or consultancy rather than technical FM'
   elif r['source']=='CF_ARCHIVE' and (not isinstance(r['award_value'],(int,float)) or r['award_value']<250000):r['screening_exclusion']='Award value below threshold or unavailable'
   elif r['source']=='CF_ARCHIVE' and r['supplier']=='UNVERIFIED':r['screening_exclusion']='Supplier missing'
   elif r['source']=='FTS_ARCHIVE':r['screening_exclusion']='Needs structured manual value and supplier verification'
