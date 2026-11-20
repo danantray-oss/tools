@@ -49,9 +49,9 @@ def collect(source,endpoint,params):
     print("TOTAL",source,totals[source],flush=True)
     return out
 fts=collect("FTS","https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages",{
-    "updatedFrom":START,"updatedTo":END,"stages":"award","limit":100})
+    "updatedFrom":START,"updatedTo":END,"limit":100})
 cf=collect("CF","https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search",{
-    "publishedFrom":START+"Z","publishedTo":END+"Z","stages":"award","size":100})
+    "publishedFrom":START+"Z","publishedTo":END+"Z","size":100})
 def cpvs(tender):
     codes=[]
     for i in tender.get("items",[]) or []:
@@ -59,7 +59,7 @@ def cpvs(tender):
         for c in arr:
             if isinstance(c,dict) and c.get("id"): codes.append(str(c["id"]))
     return sorted(set(codes))
-strong=re.compile(r"facilit(?:y|ies) management|hard fm|building (?:services|maintenance)|planned preventative maintenance|m\\s*&\\s*e(?:lectrical)?\\b|mechanical and electrical|heating (?:maintenance|service|repair|system)|boiler (?:maintenance|service)|hvac|air conditioning|chiller|lift(?:s)? (?:maintenance|repair|refurbishment|servicing)|elevator|fire (?:alarm|safety|protection|systems)|water hygiene|legionella|electrical (?:maintenance|testing|installation|servicing)|gas (?:servicing|maintenance|engineering)|property maintenance|estate(?:s)? maintenance|plant maintenance|commercial maintenance",re.I)
+strong=re.compile(r"facilit(?:y|ies) management|hard fm|building (?:services|maintenance)|planned preventative maintenance|m\s*&\s*e(?:lectrical)?\b|mechanical and electrical|heating (?:maintenance|service|repair|system)|boiler (?:maintenance|service)|hvac|air conditioning|chiller|lift(?:s)? (?:maintenance|repair|refurbishment|servicing)|elevator|fire (?:alarm|safety|protection|systems)|water hygiene|legionella|electrical (?:maintenance|testing|installation|servicing)|gas (?:servicing|maintenance|engineering)|property maintenance|estate(?:s)? maintenance|plant maintenance|commercial maintenance",re.I)
 adjacent=re.compile(r"maintenance|repair|refurbishment|mechanical|electrical|heating|boiler|ventilation|contract mobilisation|facilit(?:y|ies)",re.I)
 soft=re.compile(r"cleaning|catering|pest control|waste collection|security guard|grounds maintenance|landscaping|window cleaning|laundry|food services",re.I)
 strongcpv=("507","79993","713340","453310","453311","453312","453100")
@@ -72,11 +72,12 @@ def extract(src,rels):
         if not ("award" in (r.get("tag") or []) or "contract" in (r.get("tag") or [])):continue
         date=(r.get("date") or "")[:10]
         if not ("2026-11-05"<=date<="2026-11-18"):continue
-        t=r.get("tender") or {};title=t.get("title") or "";descr=re.sub(r"\\s+"," ",t.get("description") or "")[:1200]
+        t=r.get("tender") or {};title=t.get("title") or "";descr=re.sub(r"\s+"," ",t.get("description") or "")[:1200]
         buyer=(r.get("buyer") or {}).get("name") or ""
         codes=cpvs(t)
         alltext=(title+" "+descr)
         hard=bool(strong.search(alltext) or any(c.startswith(strongcpv) for c in codes))
+        digital=bool(re.search(r"software|licen[cs]e|digital platform|information management system|data analytics",title+" "+descr[:300],re.I))
         maybe=bool(adjacent.search(alltext))
         issoft=bool(soft.search(title) and not strong.search(title))
         technique=t.get("techniques") or {}
@@ -98,7 +99,7 @@ def extract(src,rels):
                     u=(doc or {}).get("url","")
                     if "find-tender.service.gov.uk/Notice/" in u or "contractsfinder.service.gov.uk/notice/" in u.lower():official=u;break
                 if not official and src=="FTS":
-                    match=re.search(r"\\b(\\d{6}-2026)\\b",noticeid)
+                    match=re.search(r"\b(\d{6}-2026)\b",noticeid)
                     if match: official="https://www.find-tender.service.gov.uk/Notice/"+match.group(1)
                 # For CF, source API link and OCID preserve auditability when notice URL unknown
                 record={"source":src,"publication_date":date,"ocid":r.get("ocid",""),"release_id":noticeid,
@@ -110,11 +111,12 @@ def extract(src,rels):
                     "official_notice_url":official,
                     "source_api_url":("https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/"+noticeid if src=="FTS" else
                     "https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search?publishedFrom="+START+"Z&publishedTo="+END+"Z")}
-                record["candidate"]=bool(hard and not issoft and value>=250000 and sup.get("name") and not framework and value_type=="award")
+                record["candidate"]=bool(hard and not issoft and value>=250000 and sup.get("name") and not framework and not digital and value_type=="award")
                 if hard and not issoft and value>=250000 and sup.get("name") and framework:record["reason"]="Framework: no confirmed allocation (manual check)"
                 elif not sup.get("name"):record["reason"]="No named winning supplier"
                 elif not hard:record["reason"]="Not hard FM / technical maintenance"
                 elif issoft:record["reason"]="Soft services primarily"
+                elif digital:record["reason"]="Digital/software purchase rather than operational workforce"
                 elif value<250000:record["reason"]="Below proposed value threshold"
                 elif value_type!="award":record["reason"]="Only tender estimate, award value not verified"
                 else:record["reason"]="Relevant candidate; verify contract signed, timing, hiring, novelty"
