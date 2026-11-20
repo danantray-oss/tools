@@ -1,0 +1,12 @@
+{
+  "source_candidates": 112,
+  "enriched": 112,
+  "review_priority": 1,
+  "verified_hiring_linked": 0,
+  "parse_errors": [],
+  "stage_counts": {
+    "('active', 'active')": 50,
+    "('', '')": 18,
+    "('pending', 'pending')": 44
+  }
+}
