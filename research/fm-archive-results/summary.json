@@ -16,10 +16,11 @@
     {
       "source": "CF",
       "day": "2026-11-05",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 128,
+      "suspects": 6,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-05.csv"
     },
     {
       "source": "FTS",
@@ -33,10 +34,11 @@
     {
       "source": "CF",
       "day": "2026-11-06",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 149,
+      "suspects": 1,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-06.csv"
     },
     {
       "source": "FTS",
@@ -67,10 +69,11 @@
     {
       "source": "CF",
       "day": "2026-11-08",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 1,
+      "suspects": 0,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-08.csv"
     },
     {
       "source": "FTS",
@@ -84,10 +87,11 @@
     {
       "source": "CF",
       "day": "2026-11-09",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 130,
+      "suspects": 0,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-09.csv"
     },
     {
       "source": "FTS",
@@ -101,10 +105,11 @@
     {
       "source": "CF",
       "day": "2026-11-10",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 103,
+      "suspects": 3,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-10.csv"
     },
     {
       "source": "FTS",
@@ -118,10 +123,11 @@
     {
       "source": "CF",
       "day": "2026-11-11",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 108,
+      "suspects": 4,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-11.csv"
     },
     {
       "source": "FTS",
@@ -135,10 +141,11 @@
     {
       "source": "CF",
       "day": "2026-11-12",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 103,
+      "suspects": 3,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-12.csv"
     },
     {
       "source": "FTS",
@@ -152,10 +159,11 @@
     {
       "source": "CF",
       "day": "2026-11-13",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 117,
+      "suspects": 1,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-13.csv"
     },
     {
       "source": "FTS",
@@ -203,10 +211,11 @@
     {
       "source": "CF",
       "day": "2026-11-16",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 54,
+      "suspects": 0,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-16.csv"
     },
     {
       "source": "FTS",
@@ -220,10 +229,11 @@
     {
       "source": "CF",
       "day": "2026-11-17",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 149,
+      "suspects": 3,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-17.csv"
     },
     {
       "source": "FTS",
@@ -237,17 +247,18 @@
     {
       "source": "CF",
       "day": "2026-11-18",
-      "status": "MISSING_FROM_MANIFEST",
-      "files": 0,
-      "records": 0,
-      "source_url": ""
+      "status": "OK",
+      "files": 1,
+      "records": 126,
+      "suspects": 1,
+      "source_url": "https://cdp-sirsi-production-cfs-471112843276.s3.eu-west-2.amazonaws.com/Harvester-new/2026-11/Contracts%20Finder%20OCDS%202026-11-18.csv"
     }
   ],
-  "files_downloaded": 4564,
-  "notices_screened": 4564,
+  "files_downloaded": 4575,
+  "notices_screened": 5732,
   "fts_potential_award_notices": 112,
-  "cf_potential_award_notices": 0,
-  "cf_screened_candidates": 0,
+  "cf_potential_award_notices": 22,
+  "cf_screened_candidates": 8,
   "fts_source_notice_types": {
     "UK4_2023": 932,
     "UK2_2023": 380,
@@ -276,20 +287,9 @@
     "UK14_2023": 3
   },
   "errors": [
-    "CF 2026-11-05 missing manifest resource",
-    "CF 2026-11-06 missing manifest resource",
     "CF 2026-11-07 missing manifest resource",
-    "CF 2026-11-08 missing manifest resource",
-    "CF 2026-11-09 missing manifest resource",
-    "CF 2026-11-10 missing manifest resource",
-    "CF 2026-11-11 missing manifest resource",
-    "CF 2026-11-12 missing manifest resource",
-    "CF 2026-11-13 missing manifest resource",
     "CF 2026-11-14 missing manifest resource",
-    "CF 2026-11-15 missing manifest resource",
-    "CF 2026-11-16 missing manifest resource",
-    "CF 2026-11-17 missing manifest resource",
-    "CF 2026-11-18 missing manifest resource"
+    "CF 2026-11-15 missing manifest resource"
   ],
   "all_sources_complete": false,
   "hiring_linked_verified": 0,
