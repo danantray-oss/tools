@@ -1,33 +1,16 @@
-name: Structured Find a Tender award enrichment (export fixed)
+name: Public partner contact verification
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
 permissions:
-  contents: write
+  contents: read
 jobs:
-  enrich:
+  contacts:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
           ref: research/fm-backtest-20261119
-      - run: python research/fm-enrich.py
-      - name: Upload review evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: modern-award-supplier-contract-enrichment
-          path: |
-            research/fm-archive-results/fts_enriched.csv
-            research/fm-archive-results/fts_review_priority.csv
-            research/fm-archive-results/enrichment_summary.json
-          if-no-files-found: warn
-      - name: Commit evidence
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/fm-archive-results
-          git commit -m "Research: structured supplier and signed-contract enrichment" || exit 0
-          git push origin HEAD:research/fm-backtest-20261119
+      - run: python research/partner-contact-research.py
