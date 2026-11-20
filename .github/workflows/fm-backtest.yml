@@ -1,4 +1,4 @@
-name: Official procurement archive manifest probe
+name: Official procurement daily file schema probe
 on:
   push:
     branches: [research/fm-backtest-20261119]
@@ -14,4 +14,4 @@ jobs:
         with:
           ref: research/fm-backtest-20261119
       - name: Discover daily public data manifests
-        run: python research/fm-archive-probe.py
+        run: python research/fm-archive-schema.py
