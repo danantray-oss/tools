@@ -1,4 +1,4 @@
-name: Complete 14-day official procurement archive audit
+name: Complete 14-day official procurement archive audit (CF repaired)
 on:
   push:
     branches: [research/fm-backtest-20261119]
