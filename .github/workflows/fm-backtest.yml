@@ -1,4 +1,4 @@
-name: Official procurement daily file schema probe
+name: Official procurement modern XML schema probe
 on:
   push:
     branches: [research/fm-backtest-20261119]
