@@ -1,17 +1,31 @@
-name: Official procurement modern XML schema probe
+name: Full 14-day UK procurement archives audit
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
-  probe:
+  audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
           ref: research/fm-backtest-20261119
-      - name: Discover daily public data manifests
-        run: python research/fm-archive-schema.py
+      - name: Download each archived day and screen award notices
+        run: python research/fm-archive-scan.py
+      - name: Save evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 14-day-fixed-archive-evidence
+          path: research/fm-archive-results
+          if-no-files-found: warn
+      - name: Commit evidence to isolated research branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/fm-archive-results
+          git commit -m "Research: 14-day procurement archive results" || exit 0
+          git push origin HEAD:research/fm-backtest-20261119
