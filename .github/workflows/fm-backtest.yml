@@ -1,31 +1,16 @@
-name: Complete 14-day official procurement archive audit (CF repaired)
+name: Official UK6 UK7 XML structural audit
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
 permissions:
-  contents: write
+  contents: read
 jobs:
-  audit:
+  probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
           ref: research/fm-backtest-20261119
-      - name: Full fixed archive census
-        run: python research/fm-archive-scan.py
-      - name: Upload evidence files
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: complete-daily-archive-scan
-          path: research/fm-archive-results
-          if-no-files-found: warn
-      - name: Commit results to research branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/fm-archive-results
-          git commit -m "Research: complete 14-day official archive evidence" || exit 0
-          git push origin HEAD:research/fm-backtest-20261119
+      - run: python research/fm-xml-structure.py
