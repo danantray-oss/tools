@@ -36,7 +36,7 @@ for day in monthdates:
   d=day.day; suffix='th' if 11<=d%100<=13 else {1:'st',2:'nd',3:'rd'}.get(d%10,'th')
   for source in ['FTS','CF']:
     target=f'{d}{suffix} November 2026' if source=='FTS' else date
-    matches=[r for r in meta[source] if r.get('name','').rsplit(' - ',1)[-1]==target]
+    matches=[r for r in meta[source] if ((r.get('name','').rsplit(' - ',1)[-1]==target) if source=='FTS' else r.get('name','').endswith(target))]
     if len(matches)!=1:
       archivedays.append({'source':source,'day':date,'status':'MISSING_FROM_MANIFEST','files':0,'records':0,'source_url':''})
       errors.append(f'{source} {date} missing manifest resource')
