@@ -1,4 +1,4 @@
-name: FM 14-day official tender backtest
+name: FM 14-day official tender backtest (complete-stage scan)
 on:
   push:
     branches: [research/fm-backtest-20261119]
