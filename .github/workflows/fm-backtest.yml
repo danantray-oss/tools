@@ -1,16 +1,31 @@
-name: Government archive metadata audit
+name: Complete 14-day official procurement archive audit
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
           ref: research/fm-backtest-20261119
-      - run: python research/fm-archive-probe.py
+      - name: Full fixed archive census
+        run: python research/fm-archive-scan.py
+      - name: Upload evidence files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: complete-daily-archive-scan
+          path: research/fm-archive-results
+          if-no-files-found: warn
+      - name: Commit results to research branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/fm-archive-results
+          git commit -m "Research: complete 14-day official archive evidence" || exit 0
+          git push origin HEAD:research/fm-backtest-20261119
