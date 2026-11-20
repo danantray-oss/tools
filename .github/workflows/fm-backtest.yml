@@ -1,16 +1,33 @@
-name: Official UK6 UK7 XML structural audit
+name: Structured Find a Tender award enrichment
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
-  probe:
+  enrich:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
           ref: research/fm-backtest-20261119
-      - run: python research/fm-xml-structure.py
+      - run: python research/fm-enrich.py
+      - name: Upload review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: modern-award-supplier-contract-enrichment
+          path: |
+            research/fm-archive-results/fts_enriched.csv
+            research/fm-archive-results/fts_review_priority.csv
+            research/fm-archive-results/enrichment_summary.json
+          if-no-files-found: warn
+      - name: Commit evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/fm-archive-results
+          git commit -m "Research: structured supplier and signed-contract enrichment" || exit 0
+          git push origin HEAD:research/fm-backtest-20261119
