@@ -1,4 +1,4 @@
-name: Structured Find a Tender award enrichment
+name: Structured Find a Tender award enrichment (export fixed)
 on:
   push:
     branches: [research/fm-backtest-20261119]
