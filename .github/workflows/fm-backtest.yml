@@ -1,33 +1,17 @@
-name: FM 14-day official tender backtest (complete-stage scan)
+name: Official procurement archive manifest probe
 on:
   push:
     branches: [research/fm-backtest-20261119]
     paths: ['.github/workflows/fm-backtest.yml']
-  workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  backtest:
+  probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 16
+    timeout-minutes: 4
     steps:
-      - name: Checkout research branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: research/fm-backtest-20261119
-      - name: Collect and qualify official awards
-        run: python research/fm-backtest.py
-      - name: Upload test evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: fm-public-contract-backtest-2026-11
-          path: research/fm-output/
-          if-no-files-found: warn
-      - name: Commit public dataset to research branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/fm-output/
-          git commit -m "Research: official procurement 14-day backtest evidence" || exit 0
-          git push origin HEAD:research/fm-backtest-20261119
+      - name: Discover daily public data manifests
+        run: python research/fm-archive-probe.py
