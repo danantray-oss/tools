@@ -3,23 +3,24 @@
   "window_end": "2026-11-18T23:59:59",
   "official_feed": {
     "FTS": {
-      "pages": 4,
-      "releases": 354,
-      "complete": true
+      "pages": 27,
+      "releases": 2700,
+      "complete": false
     },
     "CF": {
-      "pages": 3,
-      "releases": 300,
+      "pages": 0,
+      "releases": 0,
       "complete": false
     }
   },
   "collection_errors": [
-    "CF full page without continuation"
+    "FTS HTTP 429 The rate limit has been exceeded. Please try again in 2 minutes. URL https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-11-05T00:00:00&updatedTo=2026-11-18T23:59:59&limit=100&cursor=dXBkYXRlZEZyb209MjAyNi0xMS0wNVQwMD",
+    "CF HTTP 429 The rate limit has been exceeded. Please try again in 2 minutes. URL https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search?publishedFrom=2026-11-05T00%3A00%3A00Z&publishedTo=2026-11-18T23%3A59%3A59Z&size=100"
   ],
-  "award_rows_deduplicated": 961,
-  "potential_candidates": 1,
+  "award_rows_deduplicated": 3499,
+  "potential_candidates": 4,
   "linked_hiring_independently_verified": 0,
   "method": "Official release API. Scores inferred only. No hiring corroboration. Framework without allocated contract excluded.",
   "completeness": false,
-  "tested_at_utc": "2026-11-20T02:32:12.602136+00:00"
+  "tested_at_utc": "2026-11-20T02:35:32.614270+00:00"
 }
