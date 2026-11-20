@@ -1,4 +1,4 @@
-name: FM official feed probe
+name: FM public tender API diagnostic
 on:
   push:
     branches: [research/fm-backtest-20261119]
@@ -7,41 +7,32 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 10
     steps:
-      - name: Check government award feed
+      - name: Check formats and response errors
         shell: bash
         run: |
           python - <<'PY'
-          import urllib.request, urllib.parse, json
-          base='https://www.find-tender.service.gov.uk/api/1.1/ocdsReleasePackages'
-          params={'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','stages':'award','limit':'5'}
-          u=base+'?'+urllib.parse.urlencode(params)
-          try:
-              req=urllib.request.Request(u, headers={'User-Agent':'FM public procurement research / trial'})
-              with urllib.request.urlopen(req, timeout=45) as resp:
-                  data=resp.read(1500000)
-                  print('FTS_HTTP',resp.status,'BYTES',len(data))
-                  try:
-                      j=json.loads(data)
-                      print('FTS_KEYS',list(j),'COUNT',len(j.get('releases',[])),'NEXT',str(j.get('links',{}))[:400])
-                      for r in j.get('releases',[])[:3]:
-                          print('EXAMPLE',r.get('ocid'),r.get('date'),r.get('tender',{}).get('title'))
-                  except Exception as e: print('JSON_PARSE',str(e)[:500],data[:250])
-          except Exception as e:
-              print('FTS_ERROR',repr(e))
-          base='https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search'
-          params={'publishedFrom':'2026-11-05','publishedTo':'2026-11-05','stages':'award','limit':'5'}
-          u=base+'?'+urllib.parse.urlencode(params)
-          try:
-              req=urllib.request.Request(u, headers={'User-Agent':'FM public procurement research / trial'})
-              with urllib.request.urlopen(req, timeout=45) as resp:
-                  data=resp.read(800000)
-                  print('CF_HTTP',resp.status,'BYTES',len(data))
-                  try:
-                      j=json.loads(data)
-                      print('CF_KEYS',list(j),'COUNT',len(j.get('releases',[])),'NEXT',str(j.get('links',{}))[:300])
-                  except Exception as e: print('CF_JSON_PARSE',str(e)[:300],data[:200])
-          except Exception as e:
-              print('CF_ERROR',repr(e))
+          import urllib.request,urllib.error,urllib.parse,json
+          tests=[
+          ('FTS_1_0_nostage','https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','limit':'5'}),
+          ('FTS_1_1_nostage','https://www.find-tender.service.gov.uk/api/1.1/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','limit':'5'}),
+          ('FTS_1_0_stage','https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','stages':'award','limit':'5'}),
+          ('FTS_1_1_stage','https://www.find-tender.service.gov.uk/api/1.1/ocdsReleasePackages',{'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','stages':'award','limit':'5'}),
+          ('CF_100','https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search',{'publishedFrom':'2026-11-05T00:00:00Z','publishedTo':'2026-11-06T00:00:00Z','size':'100','page':'1'}),
+          ('CF_full','https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search',{'publishedFrom':'2026-11-05','publishedTo':'2026-11-18','size':'100','page':'1'}),
+          ]
+          for name,base,params in tests:
+            try:
+              url=base+'?'+urllib.parse.urlencode(params)
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (open procurement data study)','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=35) as f:
+                b=f.read(2500000)
+                try:
+                  j=json.loads(b)
+                  print(name,'HTTP',f.status,'LEN',len(b),'RELEASES',len(j.get('releases',[])),'KEYS',list(j),'MORE',str(j.get('links',{}))[:300])
+                  for r in j.get('releases',[])[:2]:print('ITEM',r.get('date'),r.get('ocid'),str(r.get('tender',{}).get('title'))[:90],str(r.get('tag'))[:70])
+                except Exception as e: print(name,'INVALID_JSON',repr(e),b[:1000])
+            except urllib.error.HTTPError as e: print(name,'HTTP_ERROR',e.code,e.read(1200).decode('utf-8','replace'))
+            except Exception as e: print(name,'ERROR',repr(e))
           PY
