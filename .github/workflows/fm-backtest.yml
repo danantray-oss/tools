@@ -1,0 +1,47 @@
+name: FM official feed probe
+on:
+  push:
+    branches: [research/fm-backtest-20261119]
+    paths: ['.github/workflows/fm-backtest.yml']
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Check government award feed
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, urllib.parse, json
+          base='https://www.find-tender.service.gov.uk/api/1.1/ocdsReleasePackages'
+          params={'updatedFrom':'2026-11-05T00:00:00','updatedTo':'2026-11-05T23:59:59','stages':'award','limit':'5'}
+          u=base+'?'+urllib.parse.urlencode(params)
+          try:
+              req=urllib.request.Request(u, headers={'User-Agent':'FM public procurement research / trial'})
+              with urllib.request.urlopen(req, timeout=45) as resp:
+                  data=resp.read(1500000)
+                  print('FTS_HTTP',resp.status,'BYTES',len(data))
+                  try:
+                      j=json.loads(data)
+                      print('FTS_KEYS',list(j),'COUNT',len(j.get('releases',[])),'NEXT',str(j.get('links',{}))[:400])
+                      for r in j.get('releases',[])[:3]:
+                          print('EXAMPLE',r.get('ocid'),r.get('date'),r.get('tender',{}).get('title'))
+                  except Exception as e: print('JSON_PARSE',str(e)[:500],data[:250])
+          except Exception as e:
+              print('FTS_ERROR',repr(e))
+          base='https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search'
+          params={'publishedFrom':'2026-11-05','publishedTo':'2026-11-05','stages':'award','limit':'5'}
+          u=base+'?'+urllib.parse.urlencode(params)
+          try:
+              req=urllib.request.Request(u, headers={'User-Agent':'FM public procurement research / trial'})
+              with urllib.request.urlopen(req, timeout=45) as resp:
+                  data=resp.read(800000)
+                  print('CF_HTTP',resp.status,'BYTES',len(data))
+                  try:
+                      j=json.loads(data)
+                      print('CF_KEYS',list(j),'COUNT',len(j.get('releases',[])),'NEXT',str(j.get('links',{}))[:300])
+                  except Exception as e: print('CF_JSON_PARSE',str(e)[:300],data[:200])
+          except Exception as e:
+              print('CF_ERROR',repr(e))
+          PY
